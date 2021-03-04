@@ -1,5 +1,13 @@
 <?php get_header(); ?>
 
-<h1>Тема Universal</h1>
 
-<?php get_footer();
+    <div class="container">
+
+        <h1>Universal</h1>
+
+    </div>
+
+
+
+
+<?php get_footer(); ?>

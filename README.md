@@ -1,2 +1,2 @@
-# Universal
-сайт Universal
+# Universal.loc
+## Учебный проект

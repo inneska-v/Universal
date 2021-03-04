@@ -14,7 +14,7 @@
             <?php
                 if( has_custom_logo() ){
                     // логотип есть выводим его
-                   echo get_custom_logo();
+                    the_custom_logo();
                 } else {
                     echo 'Universal';
                 }
@@ -36,4 +36,3 @@
 
     </div>
 </header>
-
