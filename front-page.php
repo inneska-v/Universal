@@ -16,10 +16,10 @@
                     	foreach( $myposts as $post ){
                     		setup_postdata( $post );
                     ?>
-                    <img src="<?php the_post_thumbnail_url() ?>" alt="<?php the_title(); ?>" class="post-thumb">
+                    <img src="<?php the_post_thumbnail_url() ?>" alt="<?php echo mb_strimwidth(get_the_title(), 0, 20, ' ... '); ?>" class="post-thumb">
                     <?php $autor_id = get_the_author_meta('ID'); ?>
                     <a href="<?php echo get_author_posts_url($autor_id); ?>" class="author">
-                        <img src="<?php echo get_avatar_url($autor_id); ?>" alt="<?php the_title(); ?>" class="avatar">
+                        <img src="<?php echo get_avatar_url($autor_id); ?>" alt="<?php echo mb_strimwidth(get_the_title(), 0, 20, ' ... '); ?>" class="avatar">
                         <div class="author-bio">
                             <span class="author-name"><?php the_author(); ?></span>
                             <span class="author-rank">Должность</span>
@@ -93,7 +93,7 @@
                 <a class="article-permalink" href="<?php the_permalink() ?>">
                     <h4 class="article-title"><?php echo mb_strimwidth(get_the_title(), 0, 50, '...'); ?></h4>
                 </a>
-                <img class="article-thumbnail" src="<?php echo get_the_post_thumbnail_url(null, 'article-thumb'); ?>" alt="<?php the_title(); ?>">
+                <img class="article-thumbnail" src="<?php echo get_the_post_thumbnail_url(null, 'article-thumb'); ?>" alt="<?php echo mb_strimwidth(get_the_title(), 0, 20, ' ... '); ?>">
             </li>
             <?php 
                 }
@@ -112,9 +112,9 @@
       // Формируем запрос в базу данных
       $query = new WP_Query([
         // Получаем 7 постов
-        'posts_per_page' => 7
-      ]);
-
+       'posts_per_page' => 7,
+       'tag'=> 'popular'
+        ] );
       // Проверяем, есть ли посты
       if ($query->have_posts()) {
         // создаем переменную-счетчик постов
@@ -145,7 +145,7 @@
                   <div class="article-grid-info">
                     <div class="author">
                       <?php $author_id = get_the_author_meta('ID'); ?>
-                      <img src="<?php echo get_avatar_url($author_id); ?>" alt="<?php the_title(); ?>"
+                      <img src="<?php echo get_avatar_url($author_id); ?>" alt="<?php echo mb_strimwidth(get_the_title(), 0, 20, ' ... '); ?>"
                            class="author-avatar">
                       <span class="author-name">
                                         <strong><?php the_author(); ?> </strong> :
@@ -156,7 +156,7 @@
                     <div class="comments">
                       <img
                           src="<?php echo get_template_directory_uri() . '/assets/images/comment.svg' ?>"
-                          alt="<?php the_title(); ?>"
+                          alt="<?php echo mb_strimwidth(get_the_title(), 0, 20, ' ... '); ?>"
                           class="comments-icon">
                       <span class="comments-counter">
                                         <?php comments_number('0', '1', '%'); ?>
@@ -192,7 +192,7 @@
                   <div class="article-grid-info">
                     <div class="author">
                       <?php $author_id = get_the_author_meta('ID'); ?>
-                      <img src="<?php echo get_avatar_url($author_id); ?>" alt="<?php the_title(); ?>"
+                      <img src="<?php echo get_avatar_url($author_id); ?>" alt="<?php echo mb_strimwidth(get_the_title(), 0, 20, ' ... '); ?>"
                            class="author-avatar">
                       <div class="author-info">
                        <span class="author-name">
@@ -205,7 +205,7 @@
                         <div class="comments">
                           <img
                               src="<?php echo get_template_directory_uri() . '/assets/images/comment-white.svg' ?>"
-                              alt="<?php the_title(); ?>"
+                              alt="<?php echo mb_strimwidth(get_the_title(), 0, 20, ' ... '); ?>"
                               class="comments-icon">
                           <span class="comments-counter">
                                           <?php comments_number('0', '1', '%'); ?>
@@ -213,7 +213,7 @@
                         </div>
                         <!-- /.comments -->
                         <div class="likes">
-                          <img src="<?php echo get_template_directory_uri() . '/assets/images/heart.svg' ?>" alt="<?php the_title(); ?>"
+                          <img src="<?php echo get_template_directory_uri() . '/assets/images/heart.svg' ?>" alt="<?php echo mb_strimwidth(get_the_title(), 0, 20, ' ... '); ?>"
                                class="likes-icon">
                           <span class="likes-counter">
                             <?php comments_number('0', '1', '%'); ?>
