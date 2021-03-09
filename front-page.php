@@ -268,8 +268,13 @@
     </ul>
     <!-- /.article-grid -->
 
-
-
-
+    <?php
+    //Подключаем сайдбар
+    get_sidebar();
+    ?>
+  </div>
 
 </div>
+<!-- /.container -->
+
+
