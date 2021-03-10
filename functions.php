@@ -101,7 +101,7 @@ class Downloader_Widget extends WP_Widget {
 		}
         if ( ! empty( $link ) ) {
 			echo '<a target= "_blank" class="widget-link" href="' . $link . '" download>
-			<img src="' . get_template_directory_uri() . '/assets/images/download.svg"  alt="<?php echo mb_strimwidth(get_the_title(), 0, 40, "...") ; ?>" class="widget-icon">
+			<img class="widget-icon" src="' . get_template_directory_uri() . '/assets/images/download.svg" alt="<?php echo mb_strimwidth(get_the_title(), 0, 60, "...") ; ?>">
 			Скачать</a>';
 		}
 
