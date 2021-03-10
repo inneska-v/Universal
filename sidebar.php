@@ -4,17 +4,14 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
  *
- * @package universal-example
+ * @package universal-theme
  */
 
 if ( ! is_active_sidebar( 'main-sidebar' ) ) {
-  return;
+	return;
 }
 ?>
 
 <aside id="secondary" class="sidebar-front-page">
-  <?php dynamic_sidebar( 'main-sidebar' ); ?>
-</aside>
-
-<!-- #secondary -->
-
+	<?php dynamic_sidebar( 'main-sidebar' ); ?>
+</aside><!-- #secondary -->
