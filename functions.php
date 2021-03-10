@@ -60,23 +60,23 @@ add_action('widgets_init', 'register_downloader_widget');
 class Downloader_Widget extends WP_Widget
 {
 
-  // Регистрация виджета используя основной класс
-  function __construct()
-  {
-    // вызов конструктора выглядит так:
-    // __construct( $id_base, $name, $widget_options = array(), $control_options = array() )
-    parent::__construct(
-      'downloader_widget', // ID виджета, если не указать (оставить ''), то ID будет равен названию класса в нижнем регистре: _widget
-      'Полезные файлы',
-      array('description' => 'Файлы для скачивания', 'classname' => 'widget-downloader',)
-    );
+// Регистрация виджета используя основной класс
+function __construct()
+{
+  // вызов конструктора выглядит так:
+  // __construct( $id_base, $name, $widget_options = array(), $control_options = array() )
+  parent::__construct(
+    'downloader_widget', // ID виджета, если не указать (оставить ''), то ID будет равен названию класса в нижнем регистре: _widget
+    'Полезные файлы',
+    array('description' => 'Файлы для скачивания', 'classname' => 'widget-downloader',)
+  );
 
-    // скрипты/стили виджета, только если он активен
-    if (is_active_widget(false, false, $this->id_base) || is_customize_preview()) {
-      add_action('wp_enqueue_scripts', array($this, 'add_downloader_widget_scripts'));
-      add_action('wp_head', array($this, 'add_downloader_widget_style'));
-    }
+  // скрипты/стили виджета, только если он активен
+  if (is_active_widget(false, false, $this->id_base) || is_customize_preview()) {
+    add_action('wp_enqueue_scripts', array($this, 'add_downloader_widget_scripts'));
+    add_action('wp_head', array($this, 'add_downloader_widget_style'));
   }
+}
 
   /**
    * Вывод виджета во Фронт-энде
@@ -84,23 +84,23 @@ class Downloader_Widget extends WP_Widget
    * @param array $args аргументы виджета.
    * @param array $instance сохраненные данные из настроек
    */
-  function widget($args, $instance)
-  {
-    $title = $instance['title'];
-    $description = $instance['description'];
-    $link = $instance['link'];
+function widget($args, $instance)
+{
+  $title = $instance['title'];
+  $description = $instance['description'];
+  $link = $instance['link'];
 
-    echo $args['before_widget'];
-    if (!empty($title)) {
-      echo $args['before_title'] . $title . $args['after_title'];
-    }
-    if (!empty($description)) {
-      echo '<p>' . $description . '</p>';
-    }
+  echo $args['before_widget'];
+  if (!empty($title)) {
+    echo $args['before_title'] . $title . $args['after_title'];
+  }
+  if (!empty($description)) {
+    echo '<p>' . $description . '</p>';
+  }
   if (!empty($link)) {
-      echo '<a target="_blank" class="widget-link" href="' . $link . '">
+    echo '<a target="_blank" class="widget-link" href="' . $link . '">
       <img class="widget-link-icon" src="' . get_template_directory_uri() . '/assets/images/download.svg' . '" alt="widget-download">
-        Скачать
+      Скачать
       </a>';
     }
     echo $args['after_widget'];
@@ -116,33 +116,32 @@ class Downloader_Widget extends WP_Widget
     $title = @ $instance['title'] ?: 'Полезные файлы';
     $description = @ $instance['description'] ?: 'Описание';
     $link = @ $instance['link'] ?: 'http://yandex.ru/';
-
-    ?>
-    <p>
-      <label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Заголовок:'); ?></label>
-      <input class="widefat"
-             id="<?php echo $this->get_field_id('title'); ?>"
-             name="<?php echo $this->get_field_name('title'); ?>"
-             type="text"
-             value="<?php echo esc_attr($title); ?>">
-    </p>
-    <p>
-      <label for="<?php echo $this->get_field_id('description'); ?>"><?php _e('Описание:'); ?></label>
-      <input class="widefat"
-             id="<?php echo $this->get_field_id('description'); ?>"
-             name="<?php echo $this->get_field_name('description'); ?>"
-             type="text"
-             value="<?php echo esc_attr($description); ?>">
-    </p>
-    <p>
-      <label for="<?php echo $this->get_field_id('link'); ?>"><?php _e('Ссылка на файл:'); ?></label>
-      <input class="widefat"
-             id="<?php echo $this->get_field_id('link'); ?>"
-             name="<?php echo $this->get_field_name('link'); ?>"
-             type="text"
-             value="<?php echo esc_attr($link); ?>">
-    </p>
-    <?php
+  ?>
+  <p>
+    <label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Заголовок:'); ?></label>
+    <input class="widefat"
+      id="<?php echo $this->get_field_id('title'); ?>"
+      name="<?php echo $this->get_field_name('title'); ?>"
+      type="text"
+      value="<?php echo esc_attr($title); ?>">
+  </p>
+  <p>
+    <label for="<?php echo $this->get_field_id('description'); ?>"><?php _e('Описание:'); ?></label>
+    <input class="widefat"
+      id="<?php echo $this->get_field_id('description'); ?>"
+      name="<?php echo $this->get_field_name('description'); ?>"
+      type="text"
+      value="<?php echo esc_attr($description); ?>">
+  </p>
+  <p>
+    <label for="<?php echo $this->get_field_id('link'); ?>"><?php _e('Ссылка на файл:'); ?></label>
+    <input class="widefat"
+      id="<?php echo $this->get_field_id('link'); ?>"
+      name="<?php echo $this->get_field_name('link'); ?>"
+      type="text"
+      value="<?php echo esc_attr($link); ?>">
+  </p>
+  <?php
   }
 
   /**
@@ -174,7 +173,8 @@ class Downloader_Widget extends WP_Widget
 
     $theme_url = get_stylesheet_directory_uri();
 
-    wp_enqueue_script('my_widget_script', $theme_url . '/my_widget_script.js');
+   // wp_enqueue_script('my_widget_script', $theme_url . '/my_widget_script.js');
+   
   }
 
   // стили виджета
@@ -186,7 +186,7 @@ class Downloader_Widget extends WP_Widget
     ?>
     <style type="text/css">
         .my_widget a {
-            display: inline;
+          display: inline;
         }
     </style>
     <?php
