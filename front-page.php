@@ -77,11 +77,9 @@
     <ul class="article-list">
         <?php
         global $post;
-
         $myposts = get_posts([ 
             'numberposts' => 4,
             'category_name' => 'articles',
-
         ]);
 
         if( $myposts ){
@@ -222,4 +220,96 @@
         <?php get_sidebar(); ?>
     </div>
 </div>
+<!-- /.container -->
+<?php
+global $post;
 
+$query = new WP_Query( [
+  'posts_per_page' => 1,
+  'category_name' => 'investigation',
+] );
+
+if ( $query->have_posts() ) {
+  while ( $query->have_posts() ) {
+    $query->the_post();
+    ?>
+    <!-- Вывода постов, функции цикла: the_title() и т.д. -->
+    <section class="investigation"
+             style="background:
+                 linear-gradient(0deg, rgba(64, 48, 61, .60), rgba(64, 48, 61, .60)),
+                 url(<?php echo get_the_post_thumbnail_url()?>) no-repeat center center; background-size: cover; object-fit: cover; width: 100%;">
+      <div class="container">
+        <h2 class="investigation-title"><?php the_title(); ?></h2>
+        <a href="<?php echo get_the_permalink(); ?>" class="more">Читать статью</a>
+      </div>
+      <!-- /.container -->
+    </section>
+    <!-- /.investigation -->
+    <?php
+  }
+} else {
+  // Постов не найдено
+}
+wp_reset_postdata(); // Сбрасываем $post
+?>
+
+<div class="container">
+  <section class="articles-list-bottom">
+    <div class="articles-hot">
+      <?php
+      global $post;
+
+      $query = new WP_Query( [
+        'posts_per_page' => 5,
+        'category_name' => 'articles',
+      ]);
+      if ( $query->have_posts() ) {
+        while ( $query->have_posts() ) {
+          $query->the_post();
+          ?>
+            <div class="articles-hot__card">
+              <img src="<?php echo get_the_post_thumbnail_url(); ?>" alt="<?php echo mb_strimwidth(get_the_title(), 0, 40, "...") ; ?>" class="articles-hot__image">
+              <div class="articles-hot__text-block">
+                <span class="category-name" style="color:<?php echo $color; ?>"><?php $category = get_the_category(); echo $category[0]->name; ?></span>
+                <h2><?php the_title(); ?></h2>
+                <p class="article-hot-excerpt">
+                  <?php echo mb_strimwidth(get_the_excerpt(), 0, 150, '...'); ?>
+                </p>
+                <div class="articles-hot__meta">
+                  <span class="date"><?php the_time('j F'); ?></span>
+                  <div class="comments">
+                    <img
+                        src="<?php echo get_template_directory_uri() . '/assets/images/comment.svg' ?>"
+                        alt="<?php echo mb_strimwidth(get_the_title(), 0, 40, "...") ; ?>"
+                        class="comments-icon">
+                            <span class="comments-counter">
+                             <?php comments_number('0', '1', '%'); ?>
+                            </span>
+                  </div>
+                  <!-- /.comments -->
+                  <div class="likes">
+                    <img src="<?php echo get_template_directory_uri() . '/assets/images/heart-dark.svg' ?>" alt="<?php echo mb_strimwidth(get_the_title(), 0, 40, "...") ; ?>"
+                         class="likes-icon">
+                    <span class="likes-counter">
+                        <?php comments_number('0', '1', '%'); ?>
+                    </span>
+                  </div>
+                  <!-- /.likes -->
+                </div>
+              </div>
+              <!-- /.text-block -->
+        </div>
+<?php
+    }
+ } else {
+    // Постов не найдено
+      }
+     wp_reset_postdata(); // Сбрасываем $post
+     ?>
+</div>
+
+    <div class="articles-recent">
+
+    </div>
+  </section>
+</div>
