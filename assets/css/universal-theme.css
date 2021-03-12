@@ -244,18 +244,19 @@ body {
   max-width: 600px;
 }
 
-.post-text .more {
-  padding-left: 20px;
-  padding-top: 10px;
-  padding-right: 50px;
-  padding-bottom: 10px;
-  color: #fff;
-  background-color: #4592ff;
-  text-decoration: none;
+.more {
+  display: inline-block;
+  color: #ffffff;
+  padding: 10px 50px 10px 20px;
   border-radius: 20px;
-  background-image: url(../images/arrow.svg);
+  background-color: #4592FF;
+  text-decoration: none;
+  background-image: url("./../images/arrow.svg");
   background-repeat: no-repeat;
   background-position: center right 20px;
+}
+.more:visited, .more:focus, .more:hover {
+  color: #ffffff;
 }
 
 .right {
@@ -723,6 +724,22 @@ body {
   margin-left: 30px;
 }
 
+.widget {
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+.widget-title {
+  padding: 20px 25px;
+  border-bottom: 1px solid #d9dadb;
+  font-weight: 900;
+  font-size: 14px;
+  line-height: 20px;
+  font-family: "lato black" sans-serif;
+  margin: 0;
+  text-transform: uppercase;
+}
+
 .widget-downloader {
   background: #3bbdc4 url("../images/file.svg") no-repeat top 25px right 15px;
   border-radius: 10px;
@@ -733,14 +750,19 @@ body {
 }
 
 .widget-downloader .widget-title {
+  padding: 0;
+  margin-top: 0;
   font-family: Roboto Slab;
   font-style: normal;
   font-weight: bold;
   font-size: 16px;
   line-height: 25px;
+  text-transform: capitalize;
+  border: none;
 }
 
 .widget-downloader .widget-description {
+  padding-top: 10px;
   font-size: 14px;
   line-height: 20px;
   color: #c1f4f5;
@@ -774,4 +796,135 @@ body {
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center;
+}
+
+.widget .tagcloud {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  padding-top: 25px;
+  padding-left: 25px;
+  padding-bottom: 30px;
+}
+
+.widget .tag-cloud-link {
+  margin-right: 10px;
+  margin-bottom: 15px;
+  text-decoration: none;
+  font-weight: 900;
+  font-size: 14px;
+  line-height: 20px;
+  padding: 5px 15px;
+  border: 1px solid #d9dadb;
+  border-radius: 5px;
+  color: #262d33;
+  text-transform: capitalize;
+}
+
+.widget-social .widget-link-facebook,
+.widget-social .widget-link-insta,
+.widget-social .widget-link-twitter,
+.widget-social .widget-link-youtube {
+  text-decoration: none;
+}
+
+.widget-social .widget-title {
+  text-align: center;
+  padding: 30px 25px;
+  border: none;
+}
+
+.widget-social-facebook,
+.widget-social-insta,
+.widget-social-twitter,
+.widget-social-youtube {
+  margin-bottom: 20px;
+  margin-left: 10px;
+}
+
+.investigation {
+  padding: 50px 0 50px;
+  text-align: center;
+}
+.investigation-title {
+  font-family: Roboto Slab;
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 50px;
+  letter-spacing: 0px;
+  color: #ffffff;
+  max-width: 946px;
+  margin: 0 auto 25px;
+}
+
+.articles-list-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 50px 0;
+}
+.articles-list-bottom h2 {
+  margin: 0;
+}
+.articles-hot {
+  flex-basis: 75%;
+  padding: 0 25px;
+  background-color: #fff;
+  border-radius: 5px;
+}
+.articles-hot__card {
+  display: flex;
+  padding-bottom: 25px;
+  padding-top: 25px;
+  align-items: center;
+}
+.articles-hot__card:not(:last-child) {
+  border-bottom: 1px solid #d9dadb;
+}
+.articles-hot__image {
+  width: 336px;
+  height: 195px;
+  object-fit: cover;
+}
+.articles-hot__text-block {
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.articles-hot__text-block .category-name {
+  color: #3bbdc4;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  line-height: 15px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.articles-hot__text-block h2 {
+  color: #262d33;
+  font-family: "Roboto Slab";
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 25px;
+}
+.articles-hot__meta {
+  display: flex;
+}
+.articles-hot__meta .likes,
+.articles-hot__meta .comments {
+  display: flex;
+  align-items: center;
+  margin-left: 5px;
+}
+.articles-hot__meta .likes img,
+.articles-hot__meta .comments img {
+  margin-right: 2px;
 }
