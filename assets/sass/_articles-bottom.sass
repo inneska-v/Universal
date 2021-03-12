@@ -1,0 +1,52 @@
+.articles
+    &-list-bottom
+        display: flex
+        flex-wrap: wrap
+        padding: 50px 0
+        h2
+            margin: 0
+    &-hot
+        flex-basis: 75%
+        padding: 0 25px
+        background-color: #fff
+        border-radius: 5px
+        &__card
+            display: flex
+            padding-bottom: 25px
+            padding-top: 25px
+            align-items: center
+            &:not(:last-child)
+                border-bottom: 1px solid #d9dadb
+        &__image
+            width: 336px
+            height: 195px
+            object-fit: cover
+        &__text-block
+            padding-left: 20px
+            display: flex
+            flex-direction: column
+            justify-content: space-between
+            .category-name
+                color: #3bbdc4
+                font-size: 12px
+                font-weight: 900
+                letter-spacing: 0.5px
+                line-height: 15px
+                text-transform: uppercase
+                margin-bottom: 10px
+
+            h2
+                color: #262d33
+                font-family: "Roboto Slab"
+                font-size: 20px
+                font-weight: 700
+                line-height: 25px
+        &__meta
+            display: flex
+            .likes, .comments
+                display: flex
+                align-items: center
+                margin-left: 5px
+                img
+                    margin-right: 2px
+
