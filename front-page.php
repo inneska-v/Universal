@@ -277,7 +277,7 @@
 
             $myposts = get_posts([ 
                 'numberposts' => 6,
-                'category_name' => 'articles, pm',
+                'category_name' => 'articles, pm, hot news'
 
             ]);
 
