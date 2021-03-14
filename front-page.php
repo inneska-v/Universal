@@ -26,7 +26,16 @@
                         </div>
                     </a>
                     <div class="post-text">
-                        <?php the_category(); ?>
+                        <?php 
+                            foreach (get_the_category() as $category) {
+                                printf(
+                                    '<a href="%s" class="category-link %s">%s</a>',
+                                    esc_url( get_category_link( $category ) ),
+                                    esc_html( $category -> slug ),
+                                    esc_html( $category -> name ),
+                                );
+                            }
+                        ?>
                         <h2 class="post-title"><?php echo mb_strimwidth(get_the_title(), 0, 60, ' ... '); ?></h2>
                         <a href="<?php echo get_the_permalink(); ?>" class="more">Читать далее</a>
                     </div>
@@ -48,7 +57,7 @@
                     $myposts = get_posts([ 
                     	'numberposts' => 5,
                         'offset' => 1,
-
+                        'category_name'  => 'javaScript, css, html, webdesign',
                     ]);
 
                     if( $myposts ){
@@ -56,7 +65,16 @@
                     		setup_postdata( $post );
                     ?>
                     <li class="post">
-                        <?php the_category(); ?>
+                            <?php 
+                                foreach (get_the_category() as $category) {
+                                    printf(
+                                        '<a href="%s" class="category-link %s">%s</a>',
+                                        esc_url( get_category_link( $category ) ),
+                                        esc_html( $category -> slug ),
+                                        esc_html( $category -> name ),
+                                    );
+                                }
+                            ?>
                         <a class="post-permalink" href="<?php echo get_the_permalink() ?>">
                             <h4 class="post-title"><?php echo mb_strimwidth(get_the_title(), 0, 60, ' ... '); ?></h4>
                         </a>
@@ -77,9 +95,11 @@
     <ul class="article-list">
         <?php
         global $post;
+
         $myposts = get_posts([ 
             'numberposts' => 4,
             'category_name' => 'articles',
+
         ]);
 
         if( $myposts ){
@@ -91,7 +111,7 @@
             <a class="article-permalink" href="<?php echo get_the_permalink() ?>">
                 <h4 class="article-title"><?php echo mb_strimwidth(get_the_title(), 0, 50, ' ... '); ?></h4>
             </a>
-            <img class="article-thumbnail" src="<?php echo get_the_post_thumbnail_url(null, 'article-thumb'); ?>" alt="<?php echo mb_strimwidth(get_the_title(), 0, 60, "...") ; ?>">
+            <img class="article-thumbnail" src="<?php echo get_the_post_thumbnail_url(null, 'article-thumb'); ?>" alt="<?php echo mb_strimwidth(get_the_title(), 0, 40, "...") ; ?>">
         </li>
         <?php 
             }
@@ -101,6 +121,7 @@
             wp_reset_postdata(); // Сбрасываем $post
         ?>
     </ul>
+ <!-- grid посты -->
     <div class="main-grid">
         <ul class="article-grid">
             <?php		
@@ -200,7 +221,7 @@
                             <li class="article-grid-item article-grid-item-default">
                                 <a href="<?php the_permalink(); ?>" class="article-grid-permalink">
                                     <h4 class="article-grid-title"><?php echo mb_strimwidth(get_the_title(), 0, 20, ' ... '); ?></h4>
-                                    <p class="article-grid-texte"><?php echo mb_strimwidth(get_the_excerpt(), 0, 50, ' ... '); ?></p>
+                                    <p class="article-grid-texte"><?php echo mb_strimwidth(get_the_excerpt(), 0, 60, ' ... '); ?></p>
                                     <span class="article-grid-date"><?php the_time('j F');?></span>
                                 </a>
                             </li>
@@ -217,99 +238,93 @@
             wp_reset_postdata(); // Сбрасываем $post
             ?>
         </ul>
-        <?php get_sidebar(); ?>
+        <?php get_sidebar('home-top'); ?>
     </div>
 </div>
-<!-- /.container -->
+<!-- investigation -->
 <?php
-global $post;
+    global $post;
 
-$query = new WP_Query( [
-  'posts_per_page' => 1,
-  'category_name' => 'investigation',
-] );
+    $myposts = get_posts([ 
+        'numberposts' => 1,
+        'category_name'  => 'investigation',
+    ]);
 
-if ( $query->have_posts() ) {
-  while ( $query->have_posts() ) {
-    $query->the_post();
+    if( $myposts ){
+        foreach( $myposts as $post ){
+            setup_postdata( $post );
     ?>
-    <!-- Вывода постов, функции цикла: the_title() и т.д. -->
-    <section class="investigation"
-             style="background:
-                 linear-gradient(0deg, rgba(64, 48, 61, .60), rgba(64, 48, 61, .60)),
-                 url(<?php echo get_the_post_thumbnail_url()?>) no-repeat center center; background-size: cover; object-fit: cover; width: 100%;">
-      <div class="container">
-        <h2 class="investigation-title"><?php the_title(); ?></h2>
-        <a href="<?php echo get_the_permalink(); ?>" class="more">Читать статью</a>
-      </div>
-      <!-- /.container -->
-    </section>
-    <!-- /.investigation -->
-    <?php
-  }
-} else {
-  // Постов не найдено
-}
-wp_reset_postdata(); // Сбрасываем $post
-?>
-
-<div class="container">
-  <section class="articles-list-bottom">
-    <div class="articles-hot">
-      <?php
-      global $post;
-
-      $query = new WP_Query( [
-        'posts_per_page' => 5,
-        'category_name' => 'articles',
-      ]);
-      if ( $query->have_posts() ) {
-        while ( $query->have_posts() ) {
-          $query->the_post();
-          ?>
-            <div class="articles-hot__card">
-              <img src="<?php echo get_the_post_thumbnail_url(); ?>" alt="<?php echo mb_strimwidth(get_the_title(), 0, 40, "...") ; ?>" class="articles-hot__image">
-              <div class="articles-hot__text-block">
-                <span class="category-name" style="color:<?php echo $color; ?>"><?php $category = get_the_category(); echo $category[0]->name; ?></span>
-                <h2><?php the_title(); ?></h2>
-                <p class="article-hot-excerpt">
-                  <?php echo mb_strimwidth(get_the_excerpt(), 0, 150, '...'); ?>
-                </p>
-                <div class="articles-hot__meta">
-                  <span class="date"><?php the_time('j F'); ?></span>
-                  <div class="comments">
-                    <img
-                        src="<?php echo get_template_directory_uri() . '/assets/images/comment.svg' ?>"
-                        alt="<?php echo mb_strimwidth(get_the_title(), 0, 40, "...") ; ?>"
-                        class="comments-icon">
-                            <span class="comments-counter">
-                             <?php comments_number('0', '1', '%'); ?>
-                            </span>
-                  </div>
-                  <!-- /.comments -->
-                  <div class="likes">
-                    <img src="<?php echo get_template_directory_uri() . '/assets/images/heart-dark.svg' ?>" alt="<?php echo mb_strimwidth(get_the_title(), 0, 40, "...") ; ?>"
-                         class="likes-icon">
-                    <span class="likes-counter">
-                        <?php comments_number('0', '1', '%'); ?>
-                    </span>
-                  </div>
-                  <!-- /.likes -->
-                </div>
-              </div>
-              <!-- /.text-block -->
+    <section class="investigation" style="background: linear-gradient(0deg, rgba(64, 48, 61, 0.45), rgba(64, 48, 61, 0.45)), url(<?php echo get_the_post_thumbnail_url(); ?>) no-repeat center center; background-size: cover; object-fit: cover; width: 100%;">
+        <div class="container">
+            <h2 class="investigation-title"><?php the_title(); ?></h2>
+            <a href="<?php echo get_the_permalink(); ?>" class="more">Читать далее</a>
         </div>
-<?php
+    </section>
+
+    <?php 
+        }
+    } else {
+        // Постов не найдено
     }
- } else {
-    // Постов не найдено
-      }
-     wp_reset_postdata(); // Сбрасываем $post
-     ?>
-</div>
+        wp_reset_postdata(); // Сбрасываем $post
+?>
+<!-- вывод постов с большой обложкой -->
+<div class="container">
+    <div class="main-records">
+        <ul class="records-list">
+            <?php
+            global $post;
 
-    <div class="articles-recent">
+            $myposts = get_posts([ 
+                'numberposts' => 6,
+                'category_name' => 'articles, pm',
 
+            ]);
+
+            if( $myposts ){
+                foreach( $myposts as $post ){
+                    setup_postdata( $post );
+            ?>
+                    <!-- Вывода постов, функции цикла: the_title() и т.д. -->
+            <li class="records-item">
+                
+                    <img class="records-img" src="<?php the_post_thumbnail_url(); ?>" alt="<?php echo mb_strimwidth(get_the_title(), 0, 40, "...") ; ?>">
+                    <div class="records-name">
+                        
+                            <?php 
+                                foreach (get_the_category() as $category) {
+                                    printf(
+                                        '<a href="%s" class="category-link %s">%s</a>',
+                                        esc_url( get_category_link( $category ) ),
+                                        esc_html( $category -> slug ),
+                                        esc_html( $category -> name ),
+                                    );
+                                }
+                            ?>
+                        
+                        
+                        <h2 class="records-title"><?php the_title(); ?></h2>
+                        <p class="records-description"><?php echo mb_strimwidth(get_the_excerpt(), 0, 160, ' ... '); ?></p>
+                        <div class="records-info">
+                            <span class="info-date"><?php the_time('j F');?></span>
+                            <img class="info-icon" src="<?php echo get_template_directory_uri() . '/assets/images/comment.svg'?>" alt="<?php echo mb_strimwidth(get_the_title(), 0, 40, "...") ; ?>">
+                            <span class="info-count"> <?php comments_number( '0', '1', '%'); ?></span>
+                            <img class="info-likes-icon" src="<?php echo get_template_directory_uri() . '/assets/images/heart-silver.svg'?>" alt="<?php echo mb_strimwidth(get_the_title(), 0, 40, "...") ; ?>">
+                            <span class="info-likes-count"> <?php comments_number( '0', '1', '%'); ?></span>
+                        </div>
+                    </div>
+                    
+                
+            </li>
+            <?php 
+                }
+            } else {
+                // Постов не найдено
+            }
+
+            wp_reset_postdata(); // Сбрасываем $post
+            ?>
+        </ul>
+        <?php get_sidebar('home-bottom'); ?>
     </div>
-  </section>
 </div>
