@@ -52,6 +52,29 @@ function universal_theme_widgets_init() {
 			'after_title'   => '</h2>',
 		)
 	);
+
+register_sidebar(
+		array(
+			'name'          => esc_html__( 'Меню в подвале', 'universal-theme' ),
+			'id'            => 'sidebar-footer',
+			'description'   => esc_html__( 'Добавте меню сюда...', 'universal-theme' ),
+			'before_widget' => '<section id="%1$s" class="footer-menu %2$s">',
+			'after_widget'  => '</section>',
+			'before_title'  => '<h2 class="footer-menu-title">',
+			'after_title'   => '</h2>',
+		)
+	);
+	register_sidebar(
+		array(
+			'name'          => esc_html__( 'Текст в подвале', 'universal-theme' ),
+			'id'            => 'sidebar-footer-text',
+			'description'   => esc_html__( 'Добавте текст сюда...', 'universal-theme' ),
+			'before_widget' => '<section id="%1$s" class="footer-text %2$s">',
+			'after_widget'  => '</section>',
+			'before_title'  => '',
+			'after_title'   => '',
+		)
+	);
 }
 add_action( 'widgets_init', 'universal_theme_widgets_init' );
 
@@ -281,7 +304,7 @@ class Social_Widget extends WP_Widget {
 		$link_f = @ $instance['link_f'] ?: 'https://facebook.com';
 		$link_i = @ $instance['link_i'] ?: 'https://instagram.com';
 		$link_t = @ $instance['link_t'] ?: 'https://twitter.com';
-		$link_y = @ $instance['link_y'] ?: 'https://yuotube.com';
+		$link_y = @ $instance['link_y'] ?: 'https://youtube.com';
 
 		?>
 		<p>
@@ -502,8 +525,11 @@ add_action( 'widgets_init', 'register_downloader_widget' );
 
 function enqueue_universal_theme() {
     wp_enqueue_style( 'style', get_stylesheet_uri() );
+		wp_enqueue_style( 'swiper-slider', get_template_directory_uri() . '/assets/css/swiper-bundle.min.css', 'style');
     wp_enqueue_style( 'universal-theme', get_template_directory_uri() . '/assets/css/universal-theme.css', 'style');
     wp_enqueue_style( 'Roboto-Slab', 'https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@700&display=swap');
+		wp_enqueue_script( 'swiper-slider', get_template_directory_uri() . '/assets/js/swiper-bundle.min.js' , null, time(), true);
+		wp_enqueue_script( 'scripts', get_template_directory_uri() . '/assets/js/scripts.js' , 'swiper-slide', time(), true);
 
 }
 add_action( 'wp_enqueue_scripts', 'enqueue_universal_theme' );
