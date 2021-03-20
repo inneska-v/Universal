@@ -390,7 +390,7 @@
 
             $myposts = get_posts([ 
                 'numberposts' => 1,
-                'category_name' => 'photo report'
+                'category_name' => 'photo-report'
             ]);
 
             if( $myposts ){
@@ -492,7 +492,7 @@
 
           $query = new WP_Query( [
             'posts_per_page' => 2,
-            'category_name' => 'без-рубрики'
+            'category_name' => 'others'
 
           ] );
 
