@@ -8,17 +8,17 @@
 </head>
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
-<header class="header">
+<header class="header header-light">
     <div class="container">
         <div class="header-wrapper">
             <?php
                 if( has_custom_logo() ){
-                    // логотип есть выводим его
-                    the_custom_logo();
+                    echo '<div class="logo">' . get_custom_logo() . 
+                    '<a href="' . get_home_url() . '" class="logo-name">' . get_bloginfo('name') . '</a></div>';
                 } else {
-                    echo 'Universal';
+                    echo '<span class="logo-name">' . get_bloginfo('name') . '</span>';
                 }
-            
+ 
                 wp_nav_menu( [
                     'theme_location'  => 'header_menu',
                     'container'       => 'nav',
@@ -30,13 +30,11 @@
                 // Поиск
                 get_search_form();
             ?>
-              <a href="#" class="header-menu-toggle">
+            <a href="#" class="header-menu-toggle">
                 <span></span>
                 <span></span>
                 <span></span>
             </a>
         </div>
-
-
     </div>
 </header>

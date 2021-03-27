@@ -9,7 +9,7 @@
 
                     $myposts = get_posts([ 
                     	'numberposts' => 1,
-                    	'category_name'  => 'javaScript, css, html, web design',
+                    	'category_name'  => 'javaScript, css, html, webdesign',
                     ]);
 
                     if( $myposts ){
@@ -65,7 +65,7 @@
                     $myposts = get_posts([ 
                     	'numberposts' => 5,
                         'offset' => 1,
-                        'category_name'  => 'javaScript, css, html, webdesign',
+                        'category_name'  => 'javaScript, css, html, webdesign'
                     ]);
 
                     if( $myposts ){
@@ -137,6 +137,8 @@
             wp_reset_postdata(); // Сбрасываем $post
         ?>
     </ul>
+
+    
  <!-- grid посты -->
     <div class="main-grid">
         <ul class="article-grid">
