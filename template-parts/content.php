@@ -153,9 +153,10 @@
 			<?php meks_ess_share(); ?>
 		
 		</div>
-	</div> <!-- .end container -->
-	
-		
-	<?php get_sidebar('footer-post'); ?>
-	
+	</div>
+  <!-- .end container -->
+
+<!-- Подключаем сайдбар с похожими постами -->
+<?php get_sidebar('footer-post'); ?>
+
 </article>
