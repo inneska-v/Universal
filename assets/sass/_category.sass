@@ -1,0 +1,132 @@
+.category
+  &-title
+    font-family: Roboto Slab
+    font-style: normal
+    font-weight: bold
+    font-size: 40px
+    line-height: 50px
+    color: #262D33
+.post
+  &-list
+    display: flex 
+    flex-wrap: wrap
+    margin: 0
+    padding: 0
+    list-style: none
+    border-radius: 10px
+  &-item
+    display: flex
+    justify-content: space-between
+    width: 23%
+    margin-bottom: 30px
+    &:not(:last-child)
+      margin-right: 2%
+  &-permalink
+    margin: 0
+    text-decoration: none
+  &-card
+    background: #FFFFFF
+    border-radius: 10px
+    overflow: hidden
+    &-thumb
+      height: 180px
+      width: 100%
+      object-fit: cover
+    &-text
+      padding: 15px 25px 25px 25px
+      height: 100%
+      display: flex
+      flex-direction: column
+      p
+        font-size: 14px
+        line-height: 20px
+        margin-bottom: 14px
+    &-title
+      font-family: Roboto Slab
+      font-style: normal
+      font-weight: bold
+      font-size: 16px
+      line-height: 25px
+      margin-top: 0
+      margin-bottom: 5px
+    .author
+      display: flex
+      align-items: center
+      margin-right: auto
+      &-avatar
+        width: 45px
+        height: 45px
+        border-radius: 50%
+      &-info
+        display: flex
+        flex-wrap: wrap
+        margin-left: 10px
+        color: #939699
+      &-name
+        width: 100%
+        color: #4B5157
+    .comments, .likes
+      margin-left: 10px
+      font-size: 12px
+      line-height: 15px
+      display: flex
+      align-items: center
+      span
+        padding: 1px
+      
+
+.category-pagination
+  margin-top: 40px
+  margin-bottom: 100px
+  .nav-links
+    display: flex
+    justify-content: center
+    background-color: #fff
+    border-radius: 10px
+  .page-numbers
+    padding: 17px 25px
+    color: #262D33
+    font-weight: 900
+    font-size: 14px
+    line-height: 20px
+    text-decoration: none
+    &:not(:last-child)
+      border-right: 1px solid #D9DADB
+  .prev
+    &::before
+      content: ''
+      width: 15px
+      height: 7px
+      display: inline-block
+      background: url(../images/arrow-prev.svg)
+      background-repeat: no-repeat
+      background-position: center
+      margin-right: 10px
+  .next
+    &::after
+      content: ''
+      width: 15px
+      height: 7px
+      display: inline-block
+      background: url(../images/arrow-next.svg)
+      background-repeat: no-repeat
+      background-position: center
+      margin-left: 10px
+  .current
+    color: #4592FF
+
+@media screen and ( max-width: 1200px )
+  .post-list
+    margin-right: -3.3%
+  .post-item
+    width: 30%
+    margin-right: 3.3%
+@media screen and ( max-width: 768px )
+  .post-list
+    margin-right: 0
+    justify-content: space-between
+  .post-item
+    width: 45%
+@media screen and ( max-width: 480px )
+  .post-item
+    width: 100%

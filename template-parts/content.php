@@ -73,14 +73,13 @@
 					<svg width="15" height="15" class="icon info-comment-icon">
 						<use xlink:href="<?php echo get_template_directory_uri()?>/assets/images/sprite.svg#comment"></use>
 					</svg>
-					
 					<span class="info-comment-count"> <?php comments_number( '0', '1', '%'); ?></span>
 
 					<svg width="14" height="14" class="icon info-likes-icon">
 						<use xlink:href="<?php echo get_template_directory_uri()?>/assets/images/sprite.svg#heart"></use>
 					</svg>
-					
 					<span class="info-likes-count"> <?php comments_number( '0', '1', '%'); ?></span>
+					
 				</div>
 				<div class="post-author">
 					<div class="post-author-info">
