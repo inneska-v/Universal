@@ -182,7 +182,7 @@
                                         <svg width="19" height="15" fill="#BCBFC2" class="icon comments-icon">
                                             <use xlink:href="<?php echo get_template_directory_uri()?>/assets/images/sprite.svg#comment"></use>
                                         </svg>                                        
-                                        <span class="comments-count"> <?php comments_number( '0', '1', '%'); ?></span>
+                                        <span class="comments-count-info"> <?php comments_number( '0', '1', '%'); ?></span>
                                         </div>
                                     </div>
                                 </a>
@@ -222,11 +222,11 @@
                                                 <span class="author-info-name"><strong><?php the_author(); ?></strong></span>
                                                 <div class="author-info-comments">
                                                     <span class="comments-date"><?php the_time('j F');?></span>
-                                                    <svg width="15" height="15" fill="#fff" class="icon comments-icon">
+                                                    <svg width="15" height="15" fill="#BCBFC2" class="icon comments-icon">
                                                         <use xlink:href="<?php echo get_template_directory_uri()?>/assets/images/sprite.svg#comment"></use>
                                                     </svg>                                                    
-                                                    <span class="comments-count"> <?php comments_number( '0', '1', '%'); ?></span>
-                                                     <svg width="15" height="15" fill="#fff" class="icon likes-icon">
+                                                    <span class="comments-count-info"> <?php comments_number( '0', '1', '%'); ?></span>
+                                                     <svg width="15" height="15" fill="#BCBFC2" class="icon likes-icon">
                                                         <use xlink:href="<?php echo get_template_directory_uri()?>/assets/images/sprite.svg#heart"></use>
                                                     </svg>
                                                     <span class="likes-count"> <?php comments_number( '0', '1', '%'); ?></span>
@@ -309,6 +309,7 @@
     }
         wp_reset_postdata(); // Сбрасываем $post
 ?>
+
 <!-- вывод постов с большой обложкой -->
 <div class="container">
     <div class="main-records">
@@ -381,9 +382,9 @@
     </div>
 </div>
 
-<!-- Секция special -->
 
-<div class="special">
+
+  <div class="special">
     <div class="container">
         <div class="special-grid">
 
