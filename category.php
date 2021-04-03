@@ -5,7 +5,7 @@
       <?php single_cat_title() ?>
     </h1>
       <ul class="post-list">
-      <?php while ( have_posts() ){ the_post(); ?>
+      <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
         <li class="post-item">
           <a href="<?php the_permalink() ?>" class="post-permalink">
             <div class="post-card">
@@ -47,10 +47,9 @@
           </a>
         </li>
         <!-- /.card -->
-      <?php } ?>
-      <?php if ( ! have_posts() ){ ?>
-        Записей нет.
-      <?php } ?>
+        <?php endwhile; else : ?>
+	    <p>Записей нет.</p>
+    <?php endif; ?>
     </ul>
     <!-- /.post-list -->
     <div class="category-pagination">

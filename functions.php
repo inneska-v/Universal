@@ -684,16 +684,15 @@ add_action( 'widgets_init', 'register_footer_posts' );
 // Подключение стилей и скиптов
 
 function enqueue_universal_theme() {
-    wp_enqueue_style( 'style', get_stylesheet_uri() );
-		wp_enqueue_style( 'swiper-slider', get_template_directory_uri() . '/assets/css/swiper-bundle.min.css', 'style');
-    wp_enqueue_style( 'universal-theme', get_template_directory_uri() . '/assets/css/universal-theme.css', 'style');
-    wp_enqueue_style( 'Roboto-Slab', 'https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@700&display=swap');
-		wp_deregister_script( 'jquery-core' );
-		wp_register_script( 'jquery-core', '//code.jquery.com/jquery-3.6.0.min.js');
-		wp_enqueue_script( 'jquery' );
-		wp_enqueue_script( 'swiper-slider', get_template_directory_uri() . '/assets/js/swiper-bundle.min.js' , null, time(), true);
-		wp_enqueue_script( 'scripts', get_template_directory_uri() . '/assets/js/scripts.js' , 'swiper-slide', time(), true);
-
+  wp_enqueue_style( 'style', get_stylesheet_uri() );
+	wp_enqueue_style( 'swiper-slider', get_template_directory_uri() . '/assets/css/swiper-bundle.min.css', 'style');
+  wp_enqueue_style( 'universal-theme', get_template_directory_uri() . '/assets/css/universal-theme.css', 'style');
+  wp_enqueue_style( 'Roboto-Slab', 'https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@700&display=swap');
+	wp_deregister_script( 'jquery-core' );
+	wp_register_script( 'jquery-core', '//code.jquery.com/jquery-3.6.0.min.js');
+	wp_enqueue_script( 'jquery' );
+	wp_enqueue_script( 'swiper-slider', get_template_directory_uri() . '/assets/js/swiper-bundle.min.js' , null, time(), true);
+	wp_enqueue_script( 'scripts', get_template_directory_uri() . '/assets/js/scripts.js' , 'swiper-slide', time(), true);
 }
 add_action( 'wp_enqueue_scripts', 'enqueue_universal_theme' );
 
@@ -744,3 +743,46 @@ function plural_form($number, $after) {
 	$cases = array (2, 0, 1, 1, 1, 2);
 	echo $number.' '.$after[ ($number%100>4 && $number%100<20)? 2: $cases[min($number%10, 5)] ];
 }
+
+add_action( 'wp_enqueue_scripts', 'my_scripts_method' );
+function my_scripts_method() {
+	// отменяем зарегистрированный jQuery
+	// вместо "jquery-core", можно вписать "jquery", тогда будет отменен еще и jquery-migrate
+}
+
+// Подключаем локализацию в самом конце подключаемых к выводу скриптов, чтобы скрипт
+// 'jquery', к которому мы подключаемся, точно был добавлен в очередь на вывод.
+// Заметка: код можно вставить в любое место functions.php темы
+add_action( 'wp_enqueue_scripts', 'adminAjax_data', 83 );
+function adminAjax_data(){
+	wp_localize_script( 'jquery', 'adminAjax',
+		array(
+			'url' => admin_url('admin-ajax.php')
+		)
+	);
+}
+
+add_action( 'wp_ajax_contacts_form', 'ajax_form' );
+add_action( 'wp_ajax_nopriv_contacts_form', 'ajax_form' );
+function ajax_form() {
+  $contact_name = $_POST['contact_name'];
+  $contact_email = $_POST['contact_email'];
+  $contact_comment = $_POST['contact_comment'];
+  $message = 'Пользователь ' . $contact_name . ' задал вопрос: ' . $contact_comment . ' Его email для связи: ' . $contact_email;
+  $headers = 'From: Inna Tanchuk <innatan.bb@gmail.com>' . "\r\n";
+  $sent_message = wp_mail('innatan.bb@gmail.com', 'Новая заявка с сайта', $message, $headers);
+  if ($sent_message) {
+    echo 'Все получилось' . $message;
+  } else {
+    echo 'Есть ошибка';
+  }
+	// выход нужен для того, чтобы в ответе не было ничего лишнего, только то что возвращает функция
+	wp_die();
+}
+
+// удалить тэг p, br и span из contact form 7
+add_filter('wpcf7_autop_or_not', '__return_false');
+add_filter('wpcf7_form_elements', function($content) {
+    $content = preg_replace('/<(span).*?class="\s*(?:.*\s)?wpcf7-form-control-wrap(?:\s[^"]+)?\s*"[^\>]*>(.*)<\/\1>/i', '\2', $content);
+    return $content;
+});
