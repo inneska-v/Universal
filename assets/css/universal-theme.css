@@ -2931,3 +2931,16 @@ body {
   background-repeat: no-repeat;
   background-size: 15px 7px;
 }
+
+.lesson-header {
+  padding: 30px 0;
+  color: #fff;
+}
+
+.video {
+  padding: 60px 0;
+}
+
+.video-info {
+  font-size: 16px;
+}
