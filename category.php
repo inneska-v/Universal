@@ -1,6 +1,9 @@
 <?php get_header()?>
 <main class="category">
   <div class="container">
+  <div class="breadcrumbs">
+    <?php echo breadcrumbs('<span class="breadcrumbs-separator"> > </span>'); ?>
+  </div>
     <h1 class="category-title">
       <?php single_cat_title() ?>
     </h1>

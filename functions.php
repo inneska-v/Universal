@@ -843,6 +843,31 @@ function plural_form($number, $after) {
 	echo $number.' '.$after[ ($number%100>4 && $number%100<20)? 2: $cases[min($number%10, 5)] ];
 }
 
+// Скрипт хлебных крошек
+function breadcrumbs($separator = ' » ', $home = 'Главная') {
+
+	$path = array_filter(explode('/', parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH)));
+	$base_url = ($_SERVER['HTTPS'] ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/';
+	$breadcrumbs = array("<a class='breadcrumbs-link' href=\"$base_url\">$home</a>");
+	$last = end( array_keys($path) );
+
+	foreach( $path as $x => $crumb ){
+		$title = ucwords(str_replace(array('.php', '_'), Array('', ' '), $crumb));
+		if ($title == 'Category'){
+			$title = 'Категории';
+		}
+		if( $x != $last ){
+			$breadcrumbs[] = '<a class="breadcrumbs-link" href="'.$base_url.$crumb.'">'.$title.'</a>';
+		}
+		else {
+			$breadcrumbs[] = $title;
+		}
+	}
+
+	return implode( $separator, $breadcrumbs );
+}
+
+
 add_action( 'wp_enqueue_scripts', 'my_scripts_method' );
 function my_scripts_method() {
 	// отменяем зарегистрированный jQuery

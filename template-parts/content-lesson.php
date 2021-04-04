@@ -21,6 +21,9 @@
 			<!-- end entry-header -->
 	
 	<div class="container">
+	<div class="breadcrumbs">
+    <?php echo breadcrumbs('<span class="breadcrumbs-separator"> > </span>'); ?>
+  </div>
     <div class="video">
             <?php
               $video_link = get_field('video_link');
