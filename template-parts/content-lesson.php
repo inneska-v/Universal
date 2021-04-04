@@ -39,6 +39,13 @@
             ?>
           </div>
           <div class="video-info">
+					<!-- вывод таксономии - жанр -->
+				<?php
+					$args = array(
+						'posts_type' => 'lesson'
+					);
+					the_taxonomies( $args );
+				?>
 					<svg width="14" height="14" class="icon info-clock-icon">
 						<use xlink:href="<?php echo get_template_directory_uri()?>/assets/images/sprite.svg#clock"></use>
 					</svg>
