@@ -2349,6 +2349,7 @@ body {
 
 .comments-area {
   width: 750px;
+  padding-bottom: 50px;
 }
 
 .comments-header {
@@ -2607,10 +2608,6 @@ body {
 
 .search-pagination .current {
   color: #4592FF;
-}
-
-.category {
-  padding-top: 50px;
 }
 
 .category-title {
